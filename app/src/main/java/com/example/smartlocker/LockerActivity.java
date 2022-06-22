@@ -51,8 +51,10 @@ public class LockerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_locker);
 
         recyclerView = findViewById(R.id.RecycleView);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
         List<LockerHolder> data = new ArrayList<LockerHolder>();
 
         RequestQueue request = Volley.newRequestQueue(this);
@@ -79,8 +81,6 @@ public class LockerActivity extends AppCompatActivity {
                                 recyclerView.setAdapter(lockerAdapter);
                                 System.out.println("data" + data);
 
-                                Toast.makeText(LockerActivity.this, Number + "",Toast.LENGTH_LONG).show();
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Log.d("AAA",e.toString());
@@ -99,9 +99,7 @@ public class LockerActivity extends AppCompatActivity {
                 });
         request.add(jsonArrayRequest);
 
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
-//        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-//        recyclerView.setLayoutManager(gridLayoutManager);
+
 
     }
 
