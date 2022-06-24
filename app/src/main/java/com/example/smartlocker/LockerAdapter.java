@@ -1,6 +1,8 @@
 package com.example.smartlocker;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +13,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.zip.Inflater;
 
 public class LockerAdapter extends RecyclerView.Adapter<LockerAdapter.ViewHolder>{
-    private List<LockerHolder> lockerHolders;
+    public List<LockerHolder> lockerHolders;
     public LockerAdapter(List<LockerHolder> lockerHolders){
         this.lockerHolders = lockerHolders;
     }
@@ -30,7 +33,19 @@ public class LockerAdapter extends RecyclerView.Adapter<LockerAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull LockerAdapter.ViewHolder holder, int position) {
-        holder.textView.setText(""+ lockerHolders.get(position).getNumber());
+        holder.textView.setText("" + lockerHolders.get(position).getNumber());
+
+        holder.imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LockerHolder lockerHolder = lockerHolders.get(holder.getAdapterPosition());
+
+                Intent intent = new Intent(view.getContext(), SingleLockerActivity.class);
+                intent.putExtra("data",lockerHolder);
+                view.getContext().startActivity(intent);
+
+            }
+        });
     }
 
     @Override
@@ -38,7 +53,7 @@ public class LockerAdapter extends RecyclerView.Adapter<LockerAdapter.ViewHolder
         return lockerHolders.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageButton imageButton;
         TextView textView;
@@ -49,7 +64,7 @@ public class LockerAdapter extends RecyclerView.Adapter<LockerAdapter.ViewHolder
             textView = itemView.findViewById(R.id.locker_number);
             imageButton = itemView.findViewById(R.id.locker_button);
 
-
         }
+
     }
 }

@@ -1,20 +1,35 @@
 package com.example.smartlocker;
 
-public class LockerHolder {
+import android.os.BaseBundle;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
+public class LockerHolder implements Serializable{
     private String locker_id;
     private String grouplockerid;
     private String label;
     private String position;
     private String available;
     private int number;
+    private String DeviceIMEI;
 
-    public LockerHolder(String locker_id, String grouplockerid, String label, String position, String available, int number) {
+    public LockerHolder(String locker_id, String grouplockerid, String label, String position, String available, int number,String DeviceIMEI) {
         this.locker_id = locker_id;
         this.grouplockerid = grouplockerid;
         this.label = label;
         this.position = position;
         this.available = available;
         this.number = number;
+        this.DeviceIMEI = DeviceIMEI;
+    }
+
+    public String getDeviceIMEI() {
+        return DeviceIMEI;
+    }
+
+    public void setDeviceIMEI(String deviceIMEI) {
+        DeviceIMEI = deviceIMEI;
     }
 
     public String getLocker_id() {

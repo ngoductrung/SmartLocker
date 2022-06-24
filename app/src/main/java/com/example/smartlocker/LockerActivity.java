@@ -39,7 +39,6 @@ import java.util.List;
 
 public class LockerActivity extends AppCompatActivity {
 
-    GridView gvLocker;
     ArrayAdapter<LockerHolder> LockerHolder;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -61,43 +60,38 @@ public class LockerActivity extends AppCompatActivity {
         String url = "http://10.0.2.2:5000/api/Lockers";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                JSONObject jsonObject = response.getJSONObject(i);
+                response -> {
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject jsonObject = response.getJSONObject(i);
 
-                                String locker_id = jsonObject.getString("lockerId");
-                                String GroupLockerId = jsonObject.getString("groupLockerId");
-                                int Number = jsonObject.getInt("number");
-                                String Label = jsonObject.getString("label");
-                                String Position = jsonObject.getString("position");
-                                String available = jsonObject.getString("available");
+                            String locker_id = jsonObject.getString("lockerId");
+                            String GroupLockerId = jsonObject.getString("groupLockerId");
+                            int Number = jsonObject.getInt("number");
+                            String Label = jsonObject.getString("label");
+                            String Position = jsonObject.getString("position");
+                            String available = jsonObject.getString("available");
+                            String deviceIMEI = jsonObject.getString("controllerDeviceImei");
 
-                                data.add(new LockerHolder(locker_id,GroupLockerId,Label,Position,available,Number));
+                            data.add(new LockerHolder(locker_id,GroupLockerId,Label,Position,available,Number,deviceIMEI));
 
-                                lockerAdapter = new LockerAdapter(data);
-                                recyclerView.setAdapter(lockerAdapter);
-                                System.out.println("data" + data);
+                            lockerAdapter = new LockerAdapter(data);
+                            recyclerView.setAdapter(lockerAdapter);
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                Log.d("AAA",e.toString());
-                            }
-                            //Toast.makeText(LockerActivity.this, response.length() + "", Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("AAA",e.toString());
                         }
+                        //Toast.makeText(LockerActivity.this, response.length() + "", Toast.LENGTH_LONG).show();
                     }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(LockerActivity.this, "Lỗi",Toast.LENGTH_LONG).show();
-                        Log.d("AAA", "Lỗi\n"+ error.toString());
+                },
+                error -> {
+                    Toast.makeText(LockerActivity.this, "Lỗi",Toast.LENGTH_LONG).show();
+                    Log.d("AAA", "Lỗi\n"+ error.toString());
 
-                    }
                 });
         request.add(jsonArrayRequest);
+
 
 
 
