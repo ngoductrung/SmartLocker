@@ -1,6 +1,7 @@
 package com.example.smartlocker;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,13 +9,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SingleLockerActivity extends AppCompatActivity {
 
 
     Boolean lock = true;
-    Button unlock;
+    Button unlock, back;
     ImageView LockImage;
     TextView number, label, position, available, imei;
 
@@ -43,11 +45,27 @@ public class SingleLockerActivity extends AppCompatActivity {
             Log.d("AAA","Lỗi " + e.toString());
         }
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), LockerActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         unlock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(lock){
+                    lock = false;
+                    LockImage.setBackground(getDrawable(R.drawable.ic_baseline_lock_open_24));
+                    unlock.setText("Lock");
+                }else{
+                    lock = true;
+                    LockImage.setBackground(getDrawable(R.drawable.ic_baseline_lock_24));
+                    unlock.setText("Unlock");
+                }
 
 
             }
@@ -61,5 +79,6 @@ public class SingleLockerActivity extends AppCompatActivity {
         position = findViewById(R.id.locker_position);
         available = findViewById(R.id.locker_available);
         imei = findViewById(R.id.locker_imei);
+        back = findViewById(R.id.back_button);
     }
 }

@@ -3,13 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/SmartLocker/app/src/main/res/drawable/custom_button.xml" value="0.1585" />
+        <entry key="..\:/AndroidStudioProjects/SmartLocker/app/src/main/res/drawable/custom_item.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/SmartLocker/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.243" />
         <entry key="..\:/AndroidStudioProjects/SmartLocker/app/src/main/res/drawable/ic_baseline_lock_open_24.xml" value="0.243" />
         <entry key="..\:/AndroidStudioProjects/SmartLocker/app/src/main/res/drawable/ic_outline_unarchive_24.xml" value="0.243" />
         <entry key="..\:/AndroidStudioProjects/SmartLocker/app/src/main/res/layout/activity_locker.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/SmartLocker/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/SmartLocker/app/src/main/res/layout/activity_signup.xml" value="0.25" />
-        <entry key="..\:/AndroidStudioProjects/SmartLocker/app/src/main/res/layout/item_locker.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/SmartLocker/app/src/main/res/layout/custom_item.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/SmartLocker/app/src/main/res/layout/item_locker.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/SmartLocker/app/src/main/res/layout/single_locker.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/SmartLocker/app/src/main/res/layout/smart_locker.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/SmartLocker/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.223" />
