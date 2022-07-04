@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,11 +28,9 @@ public class SingleLockerActivity extends AppCompatActivity {
         setContentView(R.layout.single_locker);
 
         ViewHolder();
-
+        Intent intent = getIntent();
+        LockerHolder lockerHolders = (LockerHolder) intent.getSerializableExtra("data");
         try {
-            Intent intent = getIntent();
-            LockerHolder lockerHolders = (LockerHolder) intent.getSerializableExtra("data");
-
             number.setText("Số tủ: " + lockerHolders.getNumber());
             label.setText("Nhãn hiệu: "+lockerHolders.getLabel());
             position.setText("Vị trí: "+lockerHolders.getPosition());
@@ -57,15 +56,18 @@ public class SingleLockerActivity extends AppCompatActivity {
         unlock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(lock){
-                    lock = false;
-                    LockImage.setBackground(getDrawable(R.drawable.ic_baseline_lock_open_24));
-                    unlock.setText("Lock");
-                }else{
-                    lock = true;
-                    LockImage.setBackground(getDrawable(R.drawable.ic_baseline_lock_24));
-                    unlock.setText("Unlock");
-                }
+                if(lockerHolders.getStatus().compareTo("1")==0) {
+                    if (lock) {
+                        lock = false;
+                        LockImage.setBackground(getDrawable(R.drawable.ic_baseline_lock_open_24));
+                        unlock.setText("Lock");
+                    } else {
+                        lock = true;
+                        LockImage.setBackground(getDrawable(R.drawable.ic_baseline_lock_24));
+                        unlock.setText("Unlock");
+                    }
+                }else
+                    Toast.makeText(SingleLockerActivity.this, "Tủ tạm thời không khả dụng", Toast.LENGTH_LONG).show();
 
 
             }
