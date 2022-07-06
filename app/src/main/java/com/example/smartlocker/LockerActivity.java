@@ -82,7 +82,7 @@ public class LockerActivity extends AppCompatActivity {
                             e.printStackTrace();
                             Log.d("AAA",e.toString());
                         }
-                        //Toast.makeText(LockerActivity.this, response.length() + "", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(LockerActivity.this, response.length() + "", Toast.LENGTH_LONG).show();
                     }
                 },
                 error -> {
@@ -91,9 +91,6 @@ public class LockerActivity extends AppCompatActivity {
 
                 });
         request.add(jsonArrayRequest);
-
-
-
 
     }
 

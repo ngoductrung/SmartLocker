@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     Button SigupButton;
     EditText Account;
     EditText Password;
-    String account, password;
+//    String account, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
