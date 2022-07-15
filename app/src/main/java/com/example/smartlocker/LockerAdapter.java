@@ -54,7 +54,6 @@ public class LockerAdapter extends RecyclerView.Adapter<LockerAdapter.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-
         ImageButton imageButton;
         TextView textView;
 
@@ -63,7 +62,6 @@ public class LockerAdapter extends RecyclerView.Adapter<LockerAdapter.ViewHolder
 
             textView = itemView.findViewById(R.id.locker_number);
             imageButton = itemView.findViewById(R.id.locker_button);
-
         }
 
     }

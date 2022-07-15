@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/smart_locker">
+    android:background="@drawable/bg_android7">
 
     <ImageView
         android:id="@+id/single_locker_image"
@@ -12,7 +12,7 @@
         android:layout_height="161dp"
         android:layout_marginTop="116dp"
         android:background="@drawable/ic_baseline_lock_24"
-        android:backgroundTint="@color/cardview_light_background"
+        android:backgroundTint="#F10101"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -21,21 +21,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:background="@drawable/custom_button"
         android:id="@+id/lock_button"
         android:layout_width="244dp"
         android:layout_height="65dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/custom_button"
         android:text="Unlock"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/locker_imei"
-        app:layout_constraintVertical_bias="0.231" />
+        app:layout_constraintTop_toBottomOf="@id/LockerPassword" />
 
     <TextView
         android:id="@+id/locker_number"
@@ -43,7 +38,6 @@
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="TextView"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/locker_label"
@@ -59,7 +53,6 @@
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="TextView"
         android:textColor="@color/cardview_light_background"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +65,6 @@
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="TextView"
         android:textColor="@color/cardview_light_background"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +77,6 @@
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="TextView"
         android:textColor="@color/cardview_light_background"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/locker_position"
@@ -99,24 +90,42 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
-        android:textColor="@color/cardview_light_background"
         android:gravity="center"
+        android:textColor="@color/cardview_light_background"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/single_locker_image" />
 
+
     <Button
-        android:background="@drawable/custom_button"
         android:id="@+id/back_button"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
+        android:background="@drawable/custom_button"
         android:text="back"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/lock_button"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/lock_button"
-        app:layout_constraintTop_toBottomOf="@+id/lock_button" />
+        app:layout_constraintTop_toBottomOf="@+id/lock_button"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/LockerPassword"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/custom_edittext"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/lock_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locker_imei" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

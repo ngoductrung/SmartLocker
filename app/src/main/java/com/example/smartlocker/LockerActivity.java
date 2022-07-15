@@ -65,7 +65,7 @@ public class LockerActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = response.getJSONObject(i);
 
-                            String locker_id = jsonObject.getString("lockerId");
+                            int locker_id = jsonObject.getInt("lockerId");
                             String GroupLockerId = jsonObject.getString("groupLockerId");
                             int Number = jsonObject.getInt("number");
                             String Label = jsonObject.getString("label");

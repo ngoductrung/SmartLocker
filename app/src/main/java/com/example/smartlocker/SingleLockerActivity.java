@@ -6,12 +6,26 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SingleLockerActivity extends AppCompatActivity {
 
@@ -20,6 +34,8 @@ public class SingleLockerActivity extends AppCompatActivity {
     Button unlock, back;
     ImageView LockImage;
     TextView number, label, position, available, imei;
+    EditText LockerPass;
+    int LockerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +47,7 @@ public class SingleLockerActivity extends AppCompatActivity {
         Intent intent = getIntent();
         LockerHolder lockerHolders = (LockerHolder) intent.getSerializableExtra("data");
         try {
+            LockerId = lockerHolders.getLocker_id();
             number.setText("Số tủ: " + lockerHolders.getNumber());
             label.setText("Nhãn hiệu: "+lockerHolders.getLabel());
             position.setText("Vị trí: "+lockerHolders.getPosition());
@@ -53,21 +70,50 @@ public class SingleLockerActivity extends AppCompatActivity {
         });
 
 
+
         unlock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(lockerHolders.getStatus().compareTo("1")==0) {
-                    if (lock) {
-                        lock = false;
-                        LockImage.setBackground(getDrawable(R.drawable.ic_baseline_lock_open_24));
-                        unlock.setText("Lock");
-                    } else {
-                        lock = true;
-                        LockImage.setBackground(getDrawable(R.drawable.ic_baseline_lock_24));
-                        unlock.setText("Unlock");
-                    }
-                }else
-                    Toast.makeText(SingleLockerActivity.this, "Tủ tạm thời không khả dụng", Toast.LENGTH_LONG).show();
+
+                JSONObject jsonObject = new JSONObject();
+
+                try {
+                    jsonObject.put("LockerId", LockerId);
+                    jsonObject.put("Password", LockerPass.getText().toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                RequestQueue requestQueue = Volley.newRequestQueue(SingleLockerActivity.this);
+                String url = "http://10.0.2.2:5000/api/RegisterLockers";
+
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
+                        response -> {
+                            if(response.toString().compareTo("Success") != 0) {
+                                Toast.makeText(SingleLockerActivity.this, "Sai mật khẩu", Toast.LENGTH_LONG).show();
+                            }else{
+                                Toast.makeText(SingleLockerActivity.this, "" + response, Toast.LENGTH_LONG ).show();
+                                if(lockerHolders.getStatus().compareTo("1")==0) {
+                                    if (lock) {
+                                        lock = false;
+                                        LockImage.setBackground(getDrawable(R.drawable.ic_baseline_lock_open_24));
+                                        unlock.setText("Lock");
+                                    } else {
+                                        lock = true;
+                                        LockImage.setBackground(getDrawable(R.drawable.ic_baseline_lock_24));
+                                        unlock.setText("Unlock");
+                                    }
+                                }else
+                                    Toast.makeText(SingleLockerActivity.this, "Tủ tạm thời không khả dụng", Toast.LENGTH_LONG).show();
+                            }
+
+                        },error -> {
+                    Toast.makeText(SingleLockerActivity.this, "Error" + jsonObject, Toast.LENGTH_LONG).show();
+                    Log.d("AAA", error.toString());
+
+
+                } );
+                requestQueue.add(jsonObjectRequest);
 
 
             }
@@ -82,5 +128,6 @@ public class SingleLockerActivity extends AppCompatActivity {
         available = findViewById(R.id.locker_available);
         imei = findViewById(R.id.locker_imei);
         back = findViewById(R.id.back_button);
+        LockerPass = findViewById(R.id.LockerPassword);
     }
 }

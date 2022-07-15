@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import java.io.Serializable;
 
 public class LockerHolder implements Serializable{
-    private String locker_id;
+    private int locker_id;
     private String grouplockerid;
     private String label;
     private String position;
@@ -14,7 +14,7 @@ public class LockerHolder implements Serializable{
     private int number;
     private String DeviceIMEI;
 
-    public LockerHolder(String locker_id, String grouplockerid, String label, String position, String available, int number,String DeviceIMEI) {
+    public LockerHolder(int locker_id, String grouplockerid, String label, String position, String available, int number,String DeviceIMEI) {
         this.locker_id = locker_id;
         this.grouplockerid = grouplockerid;
         this.label = label;
@@ -32,11 +32,11 @@ public class LockerHolder implements Serializable{
         DeviceIMEI = deviceIMEI;
     }
 
-    public String getLocker_id() {
+    public int getLocker_id() {
         return locker_id;
     }
 
-    public void setLocker_id(String locker_id) {
+    public void setLocker_id(int locker_id) {
         this.locker_id = locker_id;
     }
 
