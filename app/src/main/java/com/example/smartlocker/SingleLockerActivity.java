@@ -1,7 +1,6 @@
 package com.example.smartlocker;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,16 +10,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,6 +37,7 @@ public class SingleLockerActivity extends AppCompatActivity {
     TextView number, label, position, available, imei;
     EditText LockerPass;
     int LockerId;
+    private int statusCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,7 @@ public class SingleLockerActivity extends AppCompatActivity {
                 available.setText("Không khả dụng");
         }catch(Exception e){
             e.printStackTrace();
-            Log.d("AAA","Lỗi " + e.toString());
+            Log.d("AAA","Lỗi " + e);
         }
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -88,31 +90,41 @@ public class SingleLockerActivity extends AppCompatActivity {
                 String url = "http://10.0.2.2:5000/api/RegisterLockers";
 
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
-                        response -> {
-                            if(response.toString().compareTo("Success") != 0) {
-                                Toast.makeText(SingleLockerActivity.this, "Sai mật khẩu", Toast.LENGTH_LONG).show();
-                            }else{
-                                Toast.makeText(SingleLockerActivity.this, "" + response, Toast.LENGTH_LONG ).show();
-                                if(lockerHolders.getStatus().compareTo("1")==0) {
-                                    if (lock) {
-                                        lock = false;
-                                        LockImage.setBackground(getDrawable(R.drawable.ic_baseline_lock_open_24));
-                                        unlock.setText("Lock");
-                                    } else {
-                                        lock = true;
-                                        LockImage.setBackground(getDrawable(R.drawable.ic_baseline_lock_24));
-                                        unlock.setText("Unlock");
+                        response ->  {
+                                if(statusCode == 400) {
+                                        Toast.makeText(SingleLockerActivity.this, "Sai mật khẩu", Toast.LENGTH_LONG).show();
+                                    }else{
+//                                        Toast.makeText(SingleLockerActivity.this, "" + response, Toast.LENGTH_LONG ).show();
+                                        if(lockerHolders.getStatus().compareTo("1")==0) {
+                                            if (lock) {
+                                                lock = false;
+                                                LockImage.setBackground(getDrawable(R.drawable.ic_baseline_lock_open_24));
+                                                unlock.setText("Lock");
+                                            } else {
+                                                lock = true ;
+                                                LockImage.setBackground(getDrawable(R.drawable.ic_baseline_lock_24));
+                                                unlock.setText("Unlock");
+                                            }
+                                        }else
+                                            Toast.makeText(SingleLockerActivity.this, "Tủ tạm thời không khả dụng", Toast.LENGTH_LONG).show();
                                     }
-                                }else
-                                    Toast.makeText(SingleLockerActivity.this, "Tủ tạm thời không khả dụng", Toast.LENGTH_LONG).show();
-                            }
-
                         },error -> {
-                    Toast.makeText(SingleLockerActivity.this, "Error" + jsonObject, Toast.LENGTH_LONG).show();
+                    Toast.makeText(SingleLockerActivity.this, "Error " + statusCode , Toast.LENGTH_LONG).show();
                     Log.d("AAA", error.toString());
+                } ){
+//                    @Override
+//                    public Map<String, String> getHeaders() throws AuthFailureError {
+//                        HashMap<String, String> headers = new HashMap<String, String>();
+//                        headers.put("Content-Type", "application/json; charset=utf-8");
+//                        return headers;
+//                    }
+                    @Override
+                    protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                        statusCode = response.statusCode;
+                        return super.parseNetworkResponse(response);
+                    }
+                };
 
-
-                } );
                 requestQueue.add(jsonObjectRequest);
 
 

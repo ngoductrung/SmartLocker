@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 public class SignupActivity extends AppCompatActivity {
 
-    EditText username;
+    EditText lockerId;
     EditText password;
     EditText CfPassword;
     Button confirm;
@@ -22,12 +22,18 @@ public class SignupActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_signup);
         ViewHolder();
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
 
 
     }
     public void ViewHolder(){
-        username = findViewById(R.id.username);
+        lockerId = findViewById(R.id.lockerId);
         password = findViewById(R.id.password);
         CfPassword = findViewById(R.id.cfpassword);
         confirm = findViewById(R.id.confirm_button);
