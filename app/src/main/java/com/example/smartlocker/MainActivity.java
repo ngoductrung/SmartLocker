@@ -32,9 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button LoginButton;
     Button SigupButton;
-    EditText Account;
-    EditText Password;
-//    String account, password;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,45 +54,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-//        RequestQueue request = Volley.newRequestQueue(this);
-//        String url = "http://10.0.2.2:5000/api/Login";
-//        LoginButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                account = Account.getText().toString();
-//                password = Password.getText().toString();
 //
-//                JSONArray jsonArray = new JSONArray();
-//                JSONObject jsonObject = new JSONObject();
-//
-//                try {
-//                    jsonObject.put("UserName",account);
-//                    jsonObject.put("Password", password);
-//                    jsonArray.put(jsonObject);
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST,url,jsonArray, response -> {
-//                    if(response.length()>10){
-//                        Intent intent = new Intent(MainActivity.this, LockerActivity.class);
-//                        startActivity(intent);
-//                    }else
-//                        Toast.makeText(MainActivity.this, "Sai tài khoản hoặc sai mật khẩu", Toast.LENGTH_LONG);
-//
-//
-//                },error -> {
-//                    Toast.makeText(MainActivity.this, "Lỗi",Toast.LENGTH_LONG).show();
-//                    Log.d("AAA", "Lỗi\n"+ error.toString());
-//                });
-//            }
-//        });
     }
     public void ViewHolder(){
         LoginButton = findViewById(R.id.login);
         SigupButton = findViewById(R.id.signup);
-//        Account = findViewById(R.id.account);
-//        Password = findViewById(R.id.password);
     }
 }

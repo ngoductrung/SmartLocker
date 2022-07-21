@@ -11,6 +11,7 @@
         android:layout_height="126dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white"
         app:srcCompat="@drawable/locker1"
         android:scaleType="centerCrop"/>
 
@@ -20,7 +21,7 @@
         android:layout_height="30dp"
         android:textSize="24dp"
         android:gravity="center"
-        android:background="@color/cardview_light_background"
+        android:background="@drawable/custom_edittext"
         app:layout_constraintEnd_toEndOf="@+id/locker_button"
         app:layout_constraintStart_toStartOf="@+id/locker_button"
         app:layout_constraintTop_toBottomOf="@+id/locker_button" />

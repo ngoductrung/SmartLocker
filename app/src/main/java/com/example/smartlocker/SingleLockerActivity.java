@@ -109,15 +109,9 @@ public class SingleLockerActivity extends AppCompatActivity {
                                             Toast.makeText(SingleLockerActivity.this, "Tủ tạm thời không khả dụng", Toast.LENGTH_LONG).show();
                                     }
                         },error -> {
-                    Toast.makeText(SingleLockerActivity.this, "Error " + statusCode , Toast.LENGTH_LONG).show();
+                    Toast.makeText(SingleLockerActivity.this, "Sai mật khẩu" , Toast.LENGTH_LONG).show();
                     Log.d("AAA", error.toString());
                 } ){
-//                    @Override
-//                    public Map<String, String> getHeaders() throws AuthFailureError {
-//                        HashMap<String, String> headers = new HashMap<String, String>();
-//                        headers.put("Content-Type", "application/json; charset=utf-8");
-//                        return headers;
-//                    }
                     @Override
                     protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
                         statusCode = response.statusCode;
