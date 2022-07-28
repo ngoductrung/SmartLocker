@@ -1,6 +1,7 @@
 package com.example.smartlocker;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
@@ -34,6 +35,10 @@ public class LockerAdapter extends RecyclerView.Adapter<LockerAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull LockerAdapter.ViewHolder holder, int position) {
         holder.textView.setText("" + lockerHolders.get(position).getNumber());
+        if (lockerHolders.get(position).getStatus().compareTo("1")==0)
+            holder.textView.setTextColor(Color.GREEN);
+        else
+            holder.textView.setTextColor(Color.RED);
 
         holder.imageButton.setOnClickListener(new View.OnClickListener() {
             @Override

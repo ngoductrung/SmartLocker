@@ -52,21 +52,12 @@ public class SignupActivity extends AppCompatActivity {
 
                     String url = "http://10.0.2.2:5000/api/SignUpLocker";
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, response -> {
-                        if(statusCode == 400){
-                            Toast.makeText(SignupActivity.this, "Bạn đã đăng kí tủ này rồi",Toast.LENGTH_LONG).show();
-                        }else{
                             Toast.makeText(SignupActivity.this, "Đăng kí thành công", Toast.LENGTH_LONG).show();
-                        }
                     }, error -> {
-                        Toast.makeText(SignupActivity.this, "Error" + jsonObject, Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignupActivity.this, "Bạn đã đăng kí tủ này rồi", Toast.LENGTH_LONG).show();
                         Log.d("AAA", error.toString());
 
                     }){
-                        @Override
-                        protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-                            statusCode = response.statusCode;
-                            return super.parseNetworkResponse(response);
-                        }
                     };
                     requestQueue.add(jsonObjectRequest);
                 }else {

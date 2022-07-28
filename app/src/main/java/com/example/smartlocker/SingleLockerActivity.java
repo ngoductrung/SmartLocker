@@ -91,10 +91,6 @@ public class SingleLockerActivity extends AppCompatActivity {
 
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
                         response ->  {
-                                if(statusCode == 400) {
-                                        Toast.makeText(SingleLockerActivity.this, "Sai mật khẩu", Toast.LENGTH_LONG).show();
-                                    }else{
-//                                        Toast.makeText(SingleLockerActivity.this, "" + response, Toast.LENGTH_LONG ).show();
                                         if(lockerHolders.getStatus().compareTo("1")==0) {
                                             if (lock) {
                                                 lock = false;
@@ -107,7 +103,6 @@ public class SingleLockerActivity extends AppCompatActivity {
                                             }
                                         }else
                                             Toast.makeText(SingleLockerActivity.this, "Tủ tạm thời không khả dụng", Toast.LENGTH_LONG).show();
-                                    }
                         },error -> {
                     Toast.makeText(SingleLockerActivity.this, "Sai mật khẩu" , Toast.LENGTH_LONG).show();
                     Log.d("AAA", error.toString());
